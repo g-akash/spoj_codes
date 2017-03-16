@@ -1,28 +1,30 @@
 #include<iostream>
 #include<vector>
-#include<string>
-#include<math.h>
+#include<algorithm>
+#include<list>
 
 using namespace std;
 
-
-
 int main()
 {
-	string s;
-	//jose();
-	cin>>s;
-	while(s!="00e0")
+	int n;
+	cin>>n;
+	int k;
+	cin>>k;
+	list<int> participants;
+	for(int i=0;i<n;i++)participants.push_back(i);
+	list<int> ::iterator it=participants.begin();
+	for(int i=0;i<n-1;i++)
 	{
-		int n=stoi(s.substr(0,2))*pow(10,stoi(s.substr(3,1)));
-		int var=1,k;
-		while(var<=n)
+		//cout<<*it<<endl;
+		for(int j=0;j<k-1;j++)
 		{
-			k=n-var;
-			var*=2;
+			it++;
+			if(it==participants.end())it=participants.begin();
 		}
-		cout<<2*k+1<<endl;
-		cin>>s;
+		it=participants.erase(it);
+		if(it==participants.end())it=participants.begin();
+		//cout<<*it<<endl;
 	}
-
+	cout<<*it<<endl;
 }
