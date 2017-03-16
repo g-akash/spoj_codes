@@ -1,0 +1,2 @@
+#include<bits/stdc++.h>
+using namespace std;int main(){for(int i=0;i<10;i++){unsigned long ans=1;string s;cin>>s;for(int j=0;j<s.length();j++)if(s[j]=='F'||s[j]=='L'||s[j]=='T'||s[j]=='D')ans*=2;cout<<ans<<endl;}}

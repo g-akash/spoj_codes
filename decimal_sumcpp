@@ -1,0 +1,19 @@
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+		double n;
+		cin>>n;
+		double sq=sqrt(n);
+		int sqr=int(sq);
+		sq=sq-double(sqr);
+		cout<<sq<<endl;
+	}
+}
