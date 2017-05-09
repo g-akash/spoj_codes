@@ -7,6 +7,7 @@
 #include <queue>
 #include <algorithm>
 #include <list>
+#include <stdio.h>
 
 using namespace std;
 
@@ -26,20 +27,23 @@ using namespace std;
 
 int main()
 {
-	int n,var;
-	cin>>n;
-	vi endc(n),startc(n);
-	foi(n)cin>>startc[i]>>endc[i];
-	cin>>n;
-	vi startp(n),endp(n);
-	foi(n)cin>>startp[i]>>endp[i];
-	sort(startc.begin(),startc.end());
-	sort(startp.begin(),startp.end());
-	sort(endc.begin(),endc.end());
-	sort(endp.begin(),endp.end());
-	int ans = max(startp[startp.size()-1]-endc[0],startc[startc.size()-1]-endp[0]);
-	//cout<<endc[0]-startp[startp.size()-1]<<endl;
-	cout<<max(0,ans)<<endl;
-
-
+	int n,q;
+	scanf("%d %d",&n,&q);
+	vi vec(n+1);
+	foi1(n)scanf("%d",&vec[i]);
+	foi(q)
+	{
+		int typ,l,r;
+		scanf("%d %d",&typ,&l);
+		if(!typ)
+		{
+			scanf("%d",&r);
+			if(vec[r]==1)printf("ODD\n");
+			else printf("EVEN\n");
+		}
+		else
+		{
+			vec[l] = (vec[l]+1)%2;
+		}
+	}
 }

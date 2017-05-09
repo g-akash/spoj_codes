@@ -26,20 +26,19 @@ using namespace std;
 
 int main()
 {
-	int n,var;
-	cin>>n;
-	vi endc(n),startc(n);
-	foi(n)cin>>startc[i]>>endc[i];
-	cin>>n;
-	vi startp(n),endp(n);
-	foi(n)cin>>startp[i]>>endp[i];
-	sort(startc.begin(),startc.end());
-	sort(startp.begin(),startp.end());
-	sort(endc.begin(),endc.end());
-	sort(endp.begin(),endp.end());
-	int ans = max(startp[startp.size()-1]-endc[0],startc[startc.size()-1]-endp[0]);
-	//cout<<endc[0]-startp[startp.size()-1]<<endl;
-	cout<<max(0,ans)<<endl;
-
+	ll n,k;
+	cin>>n>>k;
+	k=min(n,k);
+	ll ans=k;
+	ll val=n-k;
+	ll x=-1,y=4000000000;
+	while(y-x>1)
+	{
+		ll mid=(x+y)/2;
+		if((mid*(mid+1))>=2*val)y=mid;
+		else x=mid;
+	}
+	ans+=y;
+	cout<<ans<<endl;
 
 }

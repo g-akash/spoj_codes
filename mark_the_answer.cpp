@@ -22,24 +22,3 @@ using namespace std;
 #define vll vector<ll>
 #define vvll vector<vll >
 #define si size()
-
-
-int main()
-{
-	int n,var;
-	cin>>n;
-	vi endc(n),startc(n);
-	foi(n)cin>>startc[i]>>endc[i];
-	cin>>n;
-	vi startp(n),endp(n);
-	foi(n)cin>>startp[i]>>endp[i];
-	sort(startc.begin(),startc.end());
-	sort(startp.begin(),startp.end());
-	sort(endc.begin(),endc.end());
-	sort(endp.begin(),endp.end());
-	int ans = max(startp[startp.size()-1]-endc[0],startc[startc.size()-1]-endp[0]);
-	//cout<<endc[0]-startp[startp.size()-1]<<endl;
-	cout<<max(0,ans)<<endl;
-
-
-}
