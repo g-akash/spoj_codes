@@ -1,10 +1,4 @@
-if [ -f $1 ]
-then
-	echo "File already exists".
-	exit 0
-fi
-touch $1
-echo "#include <iostream>
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -33,7 +27,30 @@ using namespace std;
 #define vvb vector<vb >
 #define vll vector<ll>
 #define vvll vector<vll >
-#define si size()" > $1
+#define si size()
 
-echo "created "$1
-subl $1
+
+bool vowel(char ch)
+{
+	if(ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U')return true;
+	if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u')return true;
+	return false;
+
+}
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		string s;
+		cin>>s;
+		int ans=0;
+		foi(s.length())
+		{
+			if(vowel(s[i]))ans++;
+		}
+		cout<<ans<<endl;
+	}
+}

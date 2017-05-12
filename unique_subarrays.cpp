@@ -23,34 +23,39 @@ using namespace std;
 #define vvll vector<vll >
 #define si size()
 
+umm(ll,ll) um;
+
+ll get_num(ll x)
+{
+	if(um.find(x)==um.end())return 0;
+	return um[x];
+}
 
 int main()
 {
-	int n,x;
-	cin>>n>>x;
-	vi vec(n);
-	foi(n)cin>>vec[i];
-	int beg=0,curr=0,count=0,ans=-1,wr=0;
-	foi(n)
+	ll t,var;
+	cin>>t;
+	while(t--)
 	{
-		curr=i;
-		if(vec[curr]<=x)
+		ll n;
+		cin>>n;
+		vi vec(n);
+		foi(n)cin>>vec[i];
+		um.clear();
+		ll ans=0,beg=0,curr=0;
+		for(ll i=0;i<n;i++)
 		{
-			count+=1;
-			ans=max(ans,count);
+			curr=i;
+			um[vec[curr]]++;
+			while(um[vec[curr]]>1)
+			{
+				um[vec[beg]]-=1;
+				beg++;
+			}
+			var = (curr-beg+1);
+			ans+=(var*(var+1))/2;
 		}
-		else if(vec[curr]>x)
-		{
-			wr+=1;
-			if(wr>1)break;
-				while(wr>1&&beg<=curr)
-				{
-					if(vec[beg]>x){wr--;}
-					else count-=1;
-					beg+=1;
-				}
-			ans=max(ans,count);
-		}
+		cout<<ans<<endl;
 	}
-	cout<<ans<<endl;
+	
 }

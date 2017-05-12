@@ -1,17 +1,11 @@
-if [ -f $1 ]
-then
-	echo "File already exists".
-	exit 0
-fi
-touch $1
-echo "#include <iostream>
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <string>
 #include <math.h>
+#include <stack>
 #include <map>
 #include <queue>
-#include <stack>
 #include <algorithm>
 #include <list>
 
@@ -33,7 +27,43 @@ using namespace std;
 #define vvb vector<vb >
 #define vll vector<ll>
 #define vvll vector<vll >
-#define si size()" > $1
+#define si size()
 
-echo "created "$1
-subl $1
+
+int main()
+{
+	int n;
+	cin>>n;
+	vi vec(n);
+	foi(n)cin>>vec[i];
+	int q,x;
+	cin>>q>>x;
+	string inst;
+	int curr=0,count=0,val=0;
+	stack<int> coins;
+	foi(q)
+	{
+		cin>>inst;
+		if(inst=="Harry")
+		{
+			coins.push(vec[curr]);
+			val+=vec[curr];
+			count++;
+			curr++;
+		}
+		else
+		{
+			if(count<=0)continue;
+			val-=coins.top();
+			coins.pop();
+			count--;
+
+		}
+		if(val==x)
+		{
+			cout<<count<<endl;
+			break;
+		}
+	}
+	cout<<-1<<endl;
+}
