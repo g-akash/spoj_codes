@@ -1,0 +1,65 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <math.h>
+#include <map>
+#include <set>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <list>
+
+using namespace std;
+
+
+#define ll long long int
+#define ull unsigned ll
+#define umm(x,y) unordered_map<x,y >
+#define mm(x,y) map<x,y >
+#define pb push_back
+#define foi(n) for(int i=0;i<n;i++)
+#define foj(n) for(int j=0;j<n;j++)
+#define foi1(n) for(int i=1;i<=n;i++)
+#define foj1(n) for(int j=1;j<=n;j++)
+#define vi vector<int>
+#define vb vector<bool>
+#define vvi vector<vi >
+#define vvb vector<vb >
+#define vll vector<ll>
+#define vvll vector<vll >
+#define si size()
+
+
+int main()
+{
+	ll n,k;
+	mm(ll,ll) m;
+	cin>>n>>k;
+	ll currsize = 0;
+	ll typ,x,y;
+	mm(ll,ll)::iterator it;
+	for(ll i=0;i<n;i++)
+	{
+		cin>>typ;
+		if(typ==1)
+		{
+			cin>>x>>y;
+			m[x*x+y*y]+=1;
+			currsize+=1;
+			if(currsize>k)
+			{
+				it = m.end();
+				it--;
+				m[it->first]-=1;
+				if(m[it->first]==0)m.erase(it);
+			}
+		}
+		else
+		{
+			it = m.end();
+			it--;
+			cout<<it->first<<endl;
+		}
+	}
+}
