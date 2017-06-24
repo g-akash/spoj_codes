@@ -30,41 +30,61 @@ using namespace std;
 #define si size()
 
 
+vvi ans(3);
+vi vec;
+int n;
+
+
+void dowork(int a, int b)
+{
+	if(ans[a][b]!=-1)return;
+	if(b==n-1)
+	{
+		if(a==0)
+		{
+			ans[a][b]=vec[n-1];
+			return;
+		}
+		else
+		{
+			ans[a][b]=0;
+			return;
+		}
+	}
+	if(a==0)
+	{
+		int curr = vec[b];
+		dowork(2,b+1);
+		ans[a][b]=curr+ans[2][b+1];
+		return;
+	}
+	else
+	{
+		int var = vec[b];
+		dowork(a-1,b+1);
+		dowork(2,b+1);
+		int tmp1 = ans[a-1][b+1], tmp2 = ans[2][b+1];
+		ans[a][b]=min(tmp1,tmp2+var);
+		return;
+	}
+	
+}
+
+
 int main()
 {
-	int n,x,y;
-	cin>>n>>x>>y;
-	vi strt(n),ed(n),v(x+2),w(y+2);
-	//strt[0]=-1000000000;
-	foi(n)cin>>strt[i]>>ed[i];
-	//ed[y]=1000000000;
-	v[0]=-1000000000;
-	w[0]= -500000000;
-	foi(x)cin>>v[i+1];
-	v[x+1] = 500000000;
-	w[y+1]=1000000000;
-	foi(y)cin>>w[i+1];
-	sort(v.begin(),v.end());
-	sort(w.begin(),w.end());
-	int ans=100000000;
-	foi(n)
+	
+	cin>>n;
+	vec.resize(n);
+	foi(n)cin>>vec[i];
+	foi(3)ans[i].resize(n);
+	foi(3)
 	{
-		int a=0,b=x+1;
-		while(b-a>1)
-		{
-			int mid = (a+b)/2;
-			if(v[mid]>strt[i])b=mid;
-			else a=mid;
-		}
-		int c=0,d=y+1;
-		while(d-c>1)
-		{
-			int mid = (c+d)/2;
-			if(w[mid]<ed[i])c=mid;
-			else d=mid;
-		}
-		if(w[d]-v[a]+1<ans)ans=w[d]-v[a]+1;
-
+		foj(n)ans[i][j]=-1;
 	}
-	cout<<ans<<endl;
+	dowork(2,0);
+	dowork(1,0);
+	dowork(0,0);
+	cout<<min(ans[0][0],min(ans[1][0],ans[2][0]))<<endl;
+
 }

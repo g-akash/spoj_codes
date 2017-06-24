@@ -32,39 +32,25 @@ using namespace std;
 
 int main()
 {
-	int n,x,y;
-	cin>>n>>x>>y;
-	vi strt(n),ed(n),v(x+2),w(y+2);
-	//strt[0]=-1000000000;
-	foi(n)cin>>strt[i]>>ed[i];
-	//ed[y]=1000000000;
-	v[0]=-1000000000;
-	w[0]= -500000000;
-	foi(x)cin>>v[i+1];
-	v[x+1] = 500000000;
-	w[y+1]=1000000000;
-	foi(y)cin>>w[i+1];
-	sort(v.begin(),v.end());
-	sort(w.begin(),w.end());
-	int ans=100000000;
-	foi(n)
+	ll n;
+	cin>>n;
+	vll vec(n);
+	vll ans(n);
+	foi(n)cin>>vec[i];
+	ans[0]=1;
+	ll final_ans=1;
+	foi1(n-1)
 	{
-		int a=0,b=x+1;
-		while(b-a>1)
+		ans[i]=1;
+		for(int j=0;j<i;j++)
 		{
-			int mid = (a+b)/2;
-			if(v[mid]>strt[i])b=mid;
-			else a=mid;
+			if(vec[i]*vec[j]<0&&abs(vec[j])<abs(vec[i]))
+			{
+				if(ans[j]+1>ans[i])ans[i]=ans[j]+1;
+			}
 		}
-		int c=0,d=y+1;
-		while(d-c>1)
-		{
-			int mid = (c+d)/2;
-			if(w[mid]<ed[i])c=mid;
-			else d=mid;
-		}
-		if(w[d]-v[a]+1<ans)ans=w[d]-v[a]+1;
-
+		final_ans=max(final_ans,ans[i]);
 	}
-	cout<<ans<<endl;
+	cout<<final_ans<<endl;
+
 }

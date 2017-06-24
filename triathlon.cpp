@@ -30,41 +30,41 @@ using namespace std;
 #define si size()
 
 
+class even
+{
+public:
+	int comp,rst;
+};
+
+bool comp(even p, even q)
+{
+	if(p.rst>q.rst)return true;
+	return false;
+}
+
 int main()
 {
-	int n,x,y;
-	cin>>n>>x>>y;
-	vi strt(n),ed(n),v(x+2),w(y+2);
-	//strt[0]=-1000000000;
-	foi(n)cin>>strt[i]>>ed[i];
-	//ed[y]=1000000000;
-	v[0]=-1000000000;
-	w[0]= -500000000;
-	foi(x)cin>>v[i+1];
-	v[x+1] = 500000000;
-	w[y+1]=1000000000;
-	foi(y)cin>>w[i+1];
-	sort(v.begin(),v.end());
-	sort(w.begin(),w.end());
-	int ans=100000000;
+	int n,a,b,c;
+	cin>>n;
+	vector<even> vec(n);
+	even e;
 	foi(n)
 	{
-		int a=0,b=x+1;
-		while(b-a>1)
+		cin>>a>>b>>c;
+		e.comp=a;
+		e.rst = b+c;
+		vec[i]=e;
+	}
+	sort(vec.begin(),vec.end(),comp);
+	int ans=0,curr=0;
+	foi(n)
+	{
+		if(curr+vec[i].comp+vec[i].rst>ans)
 		{
-			int mid = (a+b)/2;
-			if(v[mid]>strt[i])b=mid;
-			else a=mid;
+			ans = curr+vec[i].comp+vec[i].rst;
 		}
-		int c=0,d=y+1;
-		while(d-c>1)
-		{
-			int mid = (c+d)/2;
-			if(w[mid]<ed[i])c=mid;
-			else d=mid;
-		}
-		if(w[d]-v[a]+1<ans)ans=w[d]-v[a]+1;
-
+		curr+=vec[i].comp;
 	}
 	cout<<ans<<endl;
+
 }

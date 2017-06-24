@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <unordered_map>
+//#include <unordered_map>
 #include <string>
 #include <math.h>
-#include <map>
+//#include <map>
 #include <queue>
 #include <stack>
 #include <algorithm>
@@ -32,39 +32,36 @@ using namespace std;
 
 int main()
 {
-	int n,x,y;
-	cin>>n>>x>>y;
-	vi strt(n),ed(n),v(x+2),w(y+2);
-	//strt[0]=-1000000000;
-	foi(n)cin>>strt[i]>>ed[i];
-	//ed[y]=1000000000;
-	v[0]=-1000000000;
-	w[0]= -500000000;
-	foi(x)cin>>v[i+1];
-	v[x+1] = 500000000;
-	w[y+1]=1000000000;
-	foi(y)cin>>w[i+1];
-	sort(v.begin(),v.end());
-	sort(w.begin(),w.end());
-	int ans=100000000;
+	int n,var;
+	cin>>n;
+	vi vec(n);
+	
+	foi(n)
+	{	
+		cin>>var;
+		vec[i]=var;
+		
+	}
+	sort(vec.begin(),vec.end());
+	int ans=0;
 	foi(n)
 	{
-		int a=0,b=x+1;
-		while(b-a>1)
+		int tmp = 2*vec[i],x=0,y=n-1;
+		while(y-x>=1)
 		{
-			int mid = (a+b)/2;
-			if(v[mid]>strt[i])b=mid;
-			else a=mid;
+			if(vec[x]+vec[y]==tmp)
+			{
+				ans++;
+				break;
+			}
+			else if(vec[x]+vec[y]>tmp)
+			{
+				y--;
+			}
+			else
+				x++;
 		}
-		int c=0,d=y+1;
-		while(d-c>1)
-		{
-			int mid = (c+d)/2;
-			if(w[mid]<ed[i])c=mid;
-			else d=mid;
-		}
-		if(w[d]-v[a]+1<ans)ans=w[d]-v[a]+1;
-
+		
 	}
 	cout<<ans<<endl;
 }

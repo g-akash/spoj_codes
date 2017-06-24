@@ -32,39 +32,31 @@ using namespace std;
 
 int main()
 {
-	int n,x,y;
-	cin>>n>>x>>y;
-	vi strt(n),ed(n),v(x+2),w(y+2);
-	//strt[0]=-1000000000;
-	foi(n)cin>>strt[i]>>ed[i];
-	//ed[y]=1000000000;
-	v[0]=-1000000000;
-	w[0]= -500000000;
-	foi(x)cin>>v[i+1];
-	v[x+1] = 500000000;
-	w[y+1]=1000000000;
-	foi(y)cin>>w[i+1];
-	sort(v.begin(),v.end());
-	sort(w.begin(),w.end());
-	int ans=100000000;
-	foi(n)
+	int n,k;
+	cin>>n>>k;
+	k--;
+	vi vec(n);
+	foi(n)cin>>vec[i];
+	vi fz(n),fk(n);
+	fz[0]=vec[0];
+	fz[1]=vec[0]+vec[1];
+	fk[k]=0;
+	if(k<n-1)fk[k+1] = 	vec[k+1];
+	for(int i=2;i<n;i++)
 	{
-		int a=0,b=x+1;
-		while(b-a>1)
-		{
-			int mid = (a+b)/2;
-			if(v[mid]>strt[i])b=mid;
-			else a=mid;
-		}
-		int c=0,d=y+1;
-		while(d-c>1)
-		{
-			int mid = (c+d)/2;
-			if(w[mid]<ed[i])c=mid;
-			else d=mid;
-		}
-		if(w[d]-v[a]+1<ans)ans=w[d]-v[a]+1;
-
+		fz[i] = max(fz[i-2],fz[i-1])+vec[i];
 	}
-	cout<<ans<<endl;
+	for(int i=k+2;i<n;i++)
+	{
+		fk[i] = max(fk[i-1],fk[i-2])+vec[i];
+	}
+	int ans=k;
+	for(int i=k;i<n;i++)
+	{
+		if(fz[i]+fk[i]-vec[i]>fz[ans]+fk[ans]-vec[ans])
+		{
+			ans = i;
+		}
+	}
+	cout<<fz[ans]+fk[ans]-vec[ans]<<endl;
 }
