@@ -3,7 +3,7 @@
 //#include <unordered_map>
 #include <string>
 #include <math.h>
-//#include <map>
+#include <map>
 #include <queue>
 #include <stack>
 #include <algorithm>
@@ -33,22 +33,55 @@ using namespace std;
 
 int main()
 {
-	int n,m,var;
-	cin>>n>>m;
-	multiset<int> st;
-	for(int i=0;i<n+m;i++)
+	ll n,k;
+
+	vi vec;
+	vi ans(1000000);
+
+
+	cin>>n;
+	vec.resize(n);
+	foi(n)cin>>vec[i];
+	int ml=-1,curr=1;
+	ans[0]=1;
+	for(int i=1;i<1000000;i++)
+	{
+		ans[i]=0;
+		for(int j=0;j<n;j++)
+		{
+			if(i>=vec[j])
+			{
+				if(ans[i-vec[j]]==1)
+				{
+					ans[i]=1;
+					break;
+				}
+			}
+			else break;
+		}
+		if(ans[i]==1)curr++;
+		else curr=0;
+		if(curr>=vec[0])
+		{
+			ml=i;
+			break;
+		}
+	}
+
+	int var;
+	cin>>k;
+	foi(k)
 	{
 		cin>>var;
-		if(var==-1)
+		if(var<=ml)
 		{
-			set<int>::iterator it=st.end();
-			it--;
-			cout<<*it<<endl;
-			st.erase(it);
+			if(ans[var]==1)cout<<"TAK"<<endl;
+			else cout<<"NIE"<<endl;
 		}
 		else
 		{
-			st.insert(var);
+			cout<<"TAK"<<endl;
 		}
 	}
+
 }
