@@ -3,38 +3,106 @@
 #include <algorithm>
 
 using namespace std;
+vector<char> vec;
+int n,s;
+int sum;
 
-void poss(int sum, int n)
+bool inc()
 {
-	if(n==1&&sum==1)
+	for(int i=2;i<n;i++)
 	{
-		vec[sum][n]=1;
-		return;
+		if(vec[i]=='+'&&vec[i+1]=='-')
+		{
+			vec[i]='-';
+			vec[i+1]='+';
+			return true;
+		}
 	}
-	else if(n==1)
+	if(vec[2]=='-'&&sum<=s-4)
 	{
-		sum[sum][n]=0;
-		return;
+		vec[2]='+';
+		sum+=2;
+		return true;
 	}
-	if(vec[sum][n]>=0)return;
-	if()
+	return false;
 }
+
+bool dec()
+{
+	for(int i=2;i<n;i++)
+	{
+		if(vec[i]=='-'&&vec[i+1]=='+')
+		{
+			vec[i]='+';
+			vec[i+1]='-';
+			return true;
+		}
+	}
+	if(vec[2]=='+'&&sum>=s+4)
+	{
+		vec[2]='-';
+		sum-=2;
+		return true;
+	}
+
+	return false;
+}
+
 
 int main()
 {
-	int n,s;
+	
 	cin>>n>>s;
-	int sum=(n*(n+1))/2;
-	vector<char> vec;
+	sum = 0;
 	vec.resize(n+1);
-	for(int i=n;i>1;i--)
+	
+	if(n%2==0)sum=-(n/2);
+	else sum = -(n/2)+n;
+	for(int i=2;i<=n;i++)
 	{
-		if(sum-s>=2*i){sum-=2*i;vec[i]='-';}
+		if(i%2==0)vec[i]='-';
 		else vec[i]='+';
 	}
-	if(sum==s)
+	bool done = true;
+	while(sum!=s)
 	{
-		for(int i=1;i<n;i++)cout<<i<<vec[i+1];cout<<n<<endl;
+		// cout<<s<<" "<<sum<<endl;
+		// cout<<1;
+		// for(int i=2;i<=n;i++)cout<<vec[i]<<i;
+		// cout<<endl;
+		if(sum<=s-2)
+		{
+			if(!inc())
+			{
+				cout<<"Impossible"<<endl;
+				done = false;
+				break;
+			}
+
+			sum+=2;
+		}
+		else if(sum>=s+2)
+		{
+			if(!dec())
+			{
+				cout<<"Impossible"<<endl;
+				done = false;
+				break;
+			}
+			sum-=2;
+		}
+		else
+		{
+			cout<<"Impossible"<<endl;
+			done = false;
+			break;
+		}
 	}
-	else cout<<"Impossible"<<endl;
+
+	if(done)
+	{
+		cout<<1;
+		for(int i=2;i<=n;i++)cout<<vec[i]<<i;
+		cout<<endl;
+	}
 }
