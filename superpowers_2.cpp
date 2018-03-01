@@ -1,10 +1,4 @@
-if [ -f $1 ]
-then
-	echo "File already exists".
-	exit 0
-fi
-touch $1
-echo "#include <iostream>
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -33,7 +27,52 @@ using namespace std;
 #define vvb vector<vb >
 #define vll vector<ll>
 #define vvll vector<vll >
-#define si size()" > $1
+#define si size()
 
-echo "created "$1
-geany $1 &
+
+ull makebin(ull x)
+{
+	ull ans = 0;
+	ull curr = 1;
+	while(x>0)
+	{
+		if(x%2==1)ans=ans+curr;
+		curr*=10;
+		x/=2;
+	}
+	return ans;
+}
+
+
+ull calc_pow(ull a, ull b)
+{
+	ull curr = a;
+	ull ans = 1;
+	while(b>0)
+	{
+		if(b%2==1)ans*=curr;
+		curr=curr*curr;
+		ans%=1000000007;
+		curr%=1000000007;
+		b/=2;
+	}
+	return ans;
+}
+
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		ull n;
+		cin>>n;
+		ull bin_2 = makebin(n);
+		//cout<<bin_2<<endl;
+		ull pw = calc_pow((ull)2,bin_2);
+		pw = pw*pw;
+		pw%=1000000007;
+		cout<<pw<<endl;
+	}
+}

@@ -1,10 +1,4 @@
-if [ -f $1 ]
-then
-	echo "File already exists".
-	exit 0
-fi
-touch $1
-echo "#include <iostream>
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -33,7 +27,52 @@ using namespace std;
 #define vvb vector<vb >
 #define vll vector<ll>
 #define vvll vector<vll >
-#define si size()" > $1
+#define si size()
+#define MAX 1000000007
 
-echo "created "$1
-geany $1 &
+
+ll get_pow(ll a, ll b)
+{
+	ll ans = 1;
+	ll curr = a;
+	while(b!=0)
+	{
+		if(b%2==1)
+		{
+			ans*=curr;
+		}
+		ans=ans%(MAX);
+		curr=curr*curr;
+		curr=curr%(MAX);
+		b/=2;
+	}
+	return ans;
+}
+
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		ll n;
+		cin>>n;
+		if(n%2==0)
+		{
+			ll var = n/2;
+			var = get_pow(2,var);
+			var*=3;
+			var%=(MAX);
+			var-=2;
+			if(var<0)var+=(MAX);
+			cout<<var<<endl;
+		} else {
+			ll var = n/2+2;
+			var = get_pow(2,var);
+			var-=2;
+			if(var<0)var+=(MAX);
+			cout<<var<<endl;
+		}
+	}
+}

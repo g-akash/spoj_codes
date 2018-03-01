@@ -1,10 +1,4 @@
-if [ -f $1 ]
-then
-	echo "File already exists".
-	exit 0
-fi
-touch $1
-echo "#include <iostream>
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -33,7 +27,46 @@ using namespace std;
 #define vvb vector<vb >
 #define vll vector<ll>
 #define vvll vector<vll >
-#define si size()" > $1
+#define si size()
 
-echo "created "$1
-geany $1 &
+
+class buc
+{
+public:
+	ll pos;
+	char typ;
+};
+
+bool comp(buc p, buc q)
+{
+	if(p.pos<q.pos)return true;
+	return false;
+}
+
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		ll n,m;
+		cin>>n>>m;
+		vector<buc> vec(m);
+		foi(m)
+		{
+			cin>>vec[i].typ>>vec[i].pos;
+		}
+		sort(vec.begin(),vec.end(),comp);
+		ll ans = 1;
+		for(int i=0;i<vec.size()-1;i++)
+		{
+			if(vec[i].typ!=vec[i+1].typ)
+			{
+				ans*=(vec[i+1].pos-vec[i].pos);
+				ans%=1000000009;
+			}
+		}
+		cout<<ans<<endl;
+	}
+}

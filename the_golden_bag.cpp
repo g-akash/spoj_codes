@@ -1,10 +1,4 @@
-if [ -f $1 ]
-then
-	echo "File already exists".
-	exit 0
-fi
-touch $1
-echo "#include <iostream>
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -33,7 +27,46 @@ using namespace std;
 #define vvb vector<vb >
 #define vll vector<ll>
 #define vvll vector<vll >
-#define si size()" > $1
+#define si size()
 
-echo "created "$1
-geany $1 &
+
+vi primes;
+
+void make_primes()
+{
+
+	primes.resize(1000005);
+	primes[0]=1;
+	primes[1]=1;
+	for(int i=2;i<1000005;i++)
+	{
+		if(primes[i])continue;
+		for(int j=2*i;j<1000005;j+=i)
+		{
+			primes[j]=1;
+		}
+
+	}
+	return;
+}
+
+
+int main()
+{
+	make_primes();
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		for(int i=2;i<n;i++)
+		{
+			if(primes[i]==primes[n-i]&&primes[i]==0)
+			{
+				cout<<i<<" "<<n-i<<endl;
+				break;
+			}
+		}
+	}
+}

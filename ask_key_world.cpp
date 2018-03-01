@@ -1,10 +1,4 @@
-if [ -f $1 ]
-then
-	echo "File already exists".
-	exit 0
-fi
-touch $1
-echo "#include <iostream>
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -33,7 +27,44 @@ using namespace std;
 #define vvb vector<vb >
 #define vll vector<ll>
 #define vvll vector<vll >
-#define si size()" > $1
+#define si size()
 
-echo "created "$1
-geany $1 &
+
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		vector<string> vec(n);
+		foi(n)cin>>vec[i];
+		vi nums(1);
+		int var;
+		int m;
+		cin>>m;
+		cin>>nums[0];
+		string ans = "";
+		ans+=string(1,char(nums[0]%128));
+		for(int i=1;i<m;i++)
+		{
+			cin>>var;
+			nums.pb(var);
+			var-=nums[i-1];
+			ans+=string(1,char(var%128));
+		}
+		string ansp = "Sorry";
+		//cout<<ans<<endl;
+		foi(n)
+		{
+			if(vec[i]==ans)
+			{
+				ansp="Voila";
+			}
+		}
+		cout<<ansp<<endl;
+
+	}
+}

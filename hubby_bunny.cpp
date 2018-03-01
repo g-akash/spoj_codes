@@ -1,10 +1,4 @@
-if [ -f $1 ]
-then
-	echo "File already exists".
-	exit 0
-fi
-touch $1
-echo "#include <iostream>
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -33,7 +27,31 @@ using namespace std;
 #define vvb vector<vb >
 #define vll vector<ll>
 #define vvll vector<vll >
-#define si size()" > $1
+#define si size()
 
-echo "created "$1
-geany $1 &
+
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		ll a,b,c,d,e,f;
+		cin>>a>>b>>c>>d>>e>>f;
+		ll r = c+f;
+		ll dist = (d-a)*(d-a)+(e-b)*(e-b);
+		if(r*r>dist)
+		{
+			cout<<"overlapping"<<endl;
+		}
+		else if(r*r<dist)
+		{
+			cout<<"not overlapping"<<endl;
+		}
+		else
+		{
+			cout<<"tangential"<<endl;
+		}
+	}
+}

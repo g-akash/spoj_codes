@@ -1,10 +1,4 @@
-if [ -f $1 ]
-then
-	echo "File already exists".
-	exit 0
-fi
-touch $1
-echo "#include <iostream>
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -14,6 +8,7 @@ echo "#include <iostream>
 #include <stack>
 #include <algorithm>
 #include <list>
+#include <iomanip>
 
 using namespace std;
 
@@ -33,7 +28,34 @@ using namespace std;
 #define vvb vector<vb >
 #define vll vector<ll>
 #define vvll vector<vll >
-#define si size()" > $1
+#define si size()
 
-echo "created "$1
-geany $1 &
+
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		ll n;
+		cin>>n;
+		vll vec(n);
+		foi(n)cin>>vec[i];
+		ll c,d,s;
+		cin>>c>>d>>s;
+		ll cdelay = vec[0];
+		for(int i=1;i<vec.size();i++)
+		{
+			cdelay = max(cdelay,vec[i]);
+		}
+		if(n==1)
+		{
+			cout<<fixed<<setprecision(8)<<0.0<<endl;
+		}
+		else
+		{
+			cout<<fixed<<setprecision(8)<<double(cdelay*(c-1))<<endl;
+		}
+	}
+}
